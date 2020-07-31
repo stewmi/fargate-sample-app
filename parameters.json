@@ -1,0 +1,46 @@
+[
+    {
+        "ParameterKey": "VPC",
+        "ParameterValue": "vpc-65ef1918"
+    },
+    {
+        "ParameterKey": "SubnetA",
+        "ParameterValue": "subnet-87fc26e1"
+    },
+    {
+        "ParameterKey": "SubnetB",
+        "ParameterValue": "subnet-9e8861af"
+    },
+    {
+        "ParameterKey": "Image",
+        "ParameterValue": "478819023040.dkr.ecr.us-east-1.amazonaws.com/fargate-sample-app:latest"
+    },
+    {
+        "ParameterKey": "ServiceName",
+        "ParameterValue": "sample-fargate-app"
+    },
+    {
+        "ParameterKey": "ContainerPort",
+        "ParameterValue": "3000"
+    },
+    {
+        "ParameterKey": "LoadBalancerPort",
+        "ParameterValue": "80"
+    },
+    {
+        "ParameterKey": "HealthCheckPath",
+        "ParameterValue": "/"
+    },
+    {
+        "ParameterKey": "MinContainers",
+        "ParameterValue": "2"
+    },
+    {
+        "ParameterKey": "MaxContainers",
+        "ParameterValue": "10"
+    },
+    {
+        "ParameterKey": "AutoScalingTargetValue",
+        "ParameterValue": "50"
+    }
+]

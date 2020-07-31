@@ -1,0 +1,22 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "Test App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/stewmi/fargate-sample-app.git"
+  },
+  "author": "Michael Steward",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stewmi/fargate-sample-app/issues"
+  },
+  "homepage": "https://github.com/stewmi/fargate-sample-app#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
