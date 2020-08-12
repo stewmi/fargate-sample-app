@@ -36,6 +36,18 @@ Parameters:
   AutoScalingTargetValue:
     Type: Number
     Default: 50
+  ExecutionRole:
+    Type: String
+  TaskRole:
+    Type: String
+  AutoscalingRole:
+    Type: String
+  PrimaryOwner:
+    Type: String
+  SecondaryOwner:
+    Type: String
+  CostCenterID:
+    Type: String
 Resources:
   Cluster:
     Type: AWS::ECS::Cluster
@@ -67,9 +79,9 @@ Resources:
       # A role needed by ECS.
       # "The ARN of the task execution role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role."
       # "There is an optional task execution IAM role that you can specify with Fargate to allow your Fargate tasks to make API calls to Amazon ECR."
-      ExecutionRoleArn: !Ref ExecutionRole
+      ExecutionRoleArn: !Sub "arn:aws:iam::${AWS::AccountId}:role/${ExecutionRole}"
       # "The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that grants containers in the task permission to call AWS APIs on your behalf."
-      TaskRoleArn: !Ref TaskRole
+      TaskRoleArn: !Sub "arn:aws:iam::${AWS::AccountId}:role/${TaskRole}"
       ContainerDefinitions:
         - Name: !Ref ServiceName
           Image: !Ref Image
@@ -82,48 +94,6 @@ Resources:
               awslogs-region: !Ref AWS::Region
               awslogs-group: !Ref LogGroup
               awslogs-stream-prefix: ecs
-  # A role needed by ECS
-  # TODO: pull this out into a seperate template for RAPID.
-  ExecutionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !Join ['', [!Ref ServiceName, ExecutionRole]]
-      AssumeRolePolicyDocument:
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: ecs-tasks.amazonaws.com
-            Action: 'sts:AssumeRole'
-      ManagedPolicyArns:
-        - 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy'
-  # A role for the containers
-  TaskRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !Join ['', [!Ref ServiceName, TaskRole]]
-      AssumeRolePolicyDocument:
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: ecs-tasks.amazonaws.com
-            Action: 'sts:AssumeRole'
-      # ManagedPolicyArns:
-      #   -
-      # Policies:
-      #   -
-  # A role needed for auto scaling
-  AutoScalingRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !Join ['', [!Ref ServiceName, AutoScalingRole]]
-      AssumeRolePolicyDocument:
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: ecs-tasks.amazonaws.com
-            Action: 'sts:AssumeRole'
-      ManagedPolicyArns:
-        - 'arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceAutoscaleRole'
   ContainerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -227,7 +197,7 @@ Resources:
       ScalableDimension: ecs:service:DesiredCount
       ServiceNamespace: ecs
       # "The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that allows Application Auto Scaling to modify your scalable target."
-      RoleARN: !GetAtt AutoScalingRole.Arn
+      RoleARN: !Sub "arn:aws:iam::${AWS::AccountId}:role/${AutoscalingRole}"
   AutoScalingPolicy:
     Type: AWS::ApplicationAutoScaling::ScalingPolicy
     Properties:

@@ -1,19 +1,19 @@
 [
     {
         "ParameterKey": "VPC",
-        "ParameterValue": "vpc-65ef1918"
+        "ParameterValue": "vpc-0aedf14e7c9f0c024"
     },
     {
         "ParameterKey": "SubnetA",
-        "ParameterValue": "subnet-87fc26e1"
+        "ParameterValue": "subnet-0f654694c56247642"
     },
     {
         "ParameterKey": "SubnetB",
-        "ParameterValue": "subnet-9e8861af"
+        "ParameterValue": "subnet-0fc51c5764e23c186"
     },
     {
         "ParameterKey": "Image",
-        "ParameterValue": "478819023040.dkr.ecr.us-east-1.amazonaws.com/fargate-sample-app:latest"
+        "ParameterValue": "062860117467.dkr.ecr.us-east-1.amazonaws.com/fargate-sample-app:latest"
     },
     {
         "ParameterKey": "ServiceName",
@@ -42,5 +42,29 @@
     {
         "ParameterKey": "AutoScalingTargetValue",
         "ParameterValue": "50"
+    },
+    {
+        "ParameterKey": "ExecutionRole",
+        "ParameterValue": "sample-app-iam-execution-role"
+    },
+    {
+        "ParameterKey": "TaskRole",
+        "ParameterValue": "sample-app-iam-autoscaling-role"
+    },
+    {
+        "ParameterKey": "AutoscalingRole",
+        "ParameterValue": "sample-app-iam-autoscaling-role"
+    },
+    {
+        "ParameterKey": "PrimaryOwner",
+        "ParameterValue": "stewmi@amazon.com"
+    },
+    {
+        "ParameterKey": "SecondaryOwner",
+        "ParameterValue": "joesacco@amazon.com"
+    },
+    {
+        "ParameterKey": "CostCenterID",
+        "ParameterValue": "000000"
     }
 ]

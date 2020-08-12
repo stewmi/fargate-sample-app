@@ -2,6 +2,12 @@
 
 A Sample repository to deploy a web application on ECS Fargate
 
+## Configuration Details
+
+Ask AES to run the cfn/iam-template.yaml file and name it appropriately
+
+`aws cloudformation create-stack --stack-name sample-app-iam --capabilities CAPABILITY_NAMED_IAM --template-body file://cfn/iam-template.yaml`
+
 ## Deployment Details
 
 1. Create your ECR Repo
